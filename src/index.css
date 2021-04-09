@@ -208,7 +208,9 @@ input.error {
 .color-light .percent-value {
   color: var(--clr-white);
 }
-
+.color-active{
+  border: #fff 1px solid;
+}
 .alert {
   text-transform: uppercase;
   font-size: 0.85rem;
