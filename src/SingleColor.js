@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 
-const SingleColor = ({ gethex, index ,setFirst, setSecond, oneselected,twoselected,setOneselected ,setTwoselected } ) => {
+const SingleColor = ({ gethex, index  } ) => {
   const [alert, setAlert] = useState(false)
 
   useEffect(() => {
@@ -17,18 +17,10 @@ const SingleColor = ({ gethex, index ,setFirst, setSecond, oneselected,twoselect
     className ={alert?'color-active': 'color'}
     style={
       { backgroundColor: `${gethex}` }}
-      onClick ={()=>{navigator.clipboard.writeText(gethex)
+      onClick ={()=>{
         setAlert(true)
-       if(oneselected)
-       {setSecond(index)
-      setTwoselected(true)}
-      else{
-        setFirst(index)
-        setOneselected(true)
-      }
-      console.log(twoselected,oneselected)
-      }
-       }>
+      }}
+       >
 
     </article>
   )
