@@ -9,8 +9,8 @@ function App() {
   const [oneselected, setOneselected] = useState(false);
   const [twoselected, setTwoselected] = useState(false);
 
-  const [list, setList] = useState(chroma.scale(['#080b5c', '#faa']).colors(25))
-  const [correctlist, setCorrectlist] = useState(chroma.scale(['#080b5c', '#faa']).colors(25))
+  const [list, setList] = useState(chroma.scale(['#080b5c', '#faa']).colors(15))
+  const [correctlist, setCorrectlist] = useState(chroma.scale(['#080b5c', '#faa']).colors(15))
 
   function generateRandomColor(luminous) {
     let newcolor = `${randomColor({ luminosity: luminous })}`
@@ -24,15 +24,20 @@ function App() {
     let color1 = generateRandomColor('light');
     let color2 = generateRandomColor('dark');
 
-    let colors = chroma.scale([color1, color2]).colors(25)
+    let colors = chroma.scale([color1, color2]).colors(15)
     setCorrectlist([...colors])
     setList([...colors])
     console.log("cl", correctlist, "l", list)
     console.log("colors", colors)
   }
 
-  function shuffleArray(array) {
-    return [...array.sort(() => Math.random() - 0.5)];
+  function shuffleArray(arr) {
+      
+  for (let i = arr.length - 2; i > 1; --i) {
+    const j = 1 + Math.floor(Math.random() * i);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+}
+    return [...arr];
   }
 
   const swap = () => {
@@ -43,28 +48,31 @@ function App() {
     }
     setList([...newList])
 
-    setOneselected(false)
-    setTwoselected(false)
+    // setOneselected(false)
+    // setTwoselected(false)
     console.log("afterswap", "cl", correctlist, "l", list)
   }
 
   useEffect(() => {
     { (twoselected && oneselected) && swap() }
-    console.log("hello")
+    if(JSON.stringify(correctlist) == JSON.stringify(list) && twoselected)
+    {alert("you win")
+    console.log(oneselected,twoselected)}
+    return (()=>{setTwoselected(false);setOneselected(false)})
   }, [twoselected])
 
 
   return (
     <>
       <section className='container'>
-        <h3>color generator</h3>
+        {/* <h3>color generator</h3> */}
         <form onSubmit={handleSubmit}>
-          <button className='btn' type='submit'>Generate</button>
+          <button className='btn' type='submit'>Generate new colors</button>
         </form>
         <button className='btn' onClick={() => {
           setList([...shuffleArray(list)])
           console.log("stbtn", "cl", correctlist, "l", list)
-        }}>start</button>
+        }}>start game</button>
       </section>
 
       <section className='colors'>

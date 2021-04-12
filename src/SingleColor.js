@@ -5,6 +5,10 @@ import React, { useState, useEffect } from 'react'
 const SingleColor = ({ gethex, index  } ) => {
   const [alert, setAlert] = useState(false)
 
+  const alertclass = alert?'color-active':'color'
+  const fixedcolorclass = index=='0' || index=='14'? 'fixedcolor': 'nocolor';
+  const classes = alertclass;
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setAlert(false)
@@ -14,13 +18,14 @@ const SingleColor = ({ gethex, index  } ) => {
 
   return (
     <article key={index} 
-    className ={alert?'color-active': 'color'}
+    className= { classes}
     style={
       { backgroundColor: `${gethex}` }}
       onClick ={()=>{
         setAlert(true)
       }}
        >
+         <p className={fixedcolorclass}>fixed</p>
 
     </article>
   )
