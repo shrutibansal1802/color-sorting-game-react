@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react'
 
 
-const SingleColor = ({ gethex, index  } ) => {
+const SingleColor = ({ gethex, index ,level } ) => {
   const [alert, setAlert] = useState(false)
 
   const alertclass = alert?'color-active':'color'
-  const fixedcolorclass = index=='0' || index=='14'? 'fixedcolor': 'nocolor';
+  const fixedcolorclass = index=='0' || index==level-1? 'fixedcolor': 'nocolor';
   const classes = alertclass;
 
   useEffect(() => {
